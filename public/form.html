@@ -5,69 +5,92 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 		<script>
 
-			// localhost:5000/tasks
+			//var url = 'http://localhost:5000/tasks'
 			var url = 'https://still-hollows-14204.herokuapp.com/tasks';
-      var msg;
+			var msg;
 
-      function init() {
-        msg = document.getElementById("msg");
-      }
+			function init() {
+				msg = document.getElementById("msg");
+			}
 
 			async function listAllTasks() {
-				let response = await fetch(url);
-				let data = await response.json();
-				msg.innerHTML = JSON.stringify(data);
+				try {
+					let response = await fetch(url);
+					let data = await response.json();
+					msg.innerHTML = JSON.stringify(data);
+				}
+				catch (err) {
+					msg.innerHTML = err;
+				}
 			}
 
 			async function createTask() {
-				let desc = prompt("Enter a task description: ");
-				let response = await fetch(url, {
-					headers: {
-						"Content-Type": "application/json; charset=utf-8"
-					},
+				try {
+					let desc = prompt("Enter a task description: ");
+					let response = await fetch(url, {
+						headers: {
+							"Content-Type": "application/json; charset=utf-8"
+						},
 						method: 'POST',
 						body: JSON.stringify({
 							name: desc,
 						})
 					});
 					let data = await response.json();
-				msg.innerHTML = JSON.stringify(data);
+					msg.innerHTML = JSON.stringify(data);
+				} catch (err) {
+					msg.innerHTML = err;
+				}
 			}
 
 			async function readTask() {
-        let id = prompt("Enter a task ID: ");
-        let response = await fetch(url + "/" + id);
-          let data = await response.json();
-        msg.innerHTML = JSON.stringify(data);
+				try {
+					let id = prompt("Enter a task ID: ");
+					let response = await fetch(url + "/" + id);
+					let data = await response.json();
+					msg.innerHTML = JSON.stringify(data);
+				} catch (err) {
+					msg.innerHTML = err;
+				}
 			}
 
 			async function updateTask() {
-        let id = prompt("Enter a task ID: ");
-        let newStatus = prompt("Enter a status (pending, ongoing or completed)");
-        let response = await fetch(url + "/" + id, {
-          headers: {
-            "Content-Type": "application/json; charset=utf-8"
-          },
-            method: 'PUT',
-            body: JSON.stringify({
-              status: newStatus,
-            })
-          });
-          let data = await response.json();
-        msg.innerHTML = JSON.stringify(data);
-      }
+				try {
+					let id = prompt("Enter a task ID: ");
+					let newStatus = prompt("Enter a status (pending, ongoing or completed)");
+					let response = await fetch(url + "/" + id, {
+						headers: {
+							"Content-Type": "application/json; charset=utf-8"
+						},
+						method: 'PUT',
+						body: JSON.stringify({
+							status: newStatus,
+						})
+					});
+					let data = await response.json();
+					msg.innerHTML = JSON.stringify(data);
+				} catch (err) {
+					msg.innerHTML = err;
+				}
+			}
 
 			async function deleteTask() {
-        let id = prompt("Enter a task ID: ");
-        let response = await fetch(url + "/" + id, {
-          headers: {
-            "Content-Type": "application/json; charset=utf-8"
-          },
-            method: 'DELETE'
-          });
-          let data = await response.json();
-        msg.innerHTML = JSON.stringify(data);
-      }
+				try {
+
+
+					let id = prompt("Enter a task ID: ");
+					let response = await fetch(url + "/" + id, {
+						headers: {
+							"Content-Type": "application/json; charset=utf-8"
+						},
+						method: 'DELETE'
+					});
+					let data = await response.json();
+					msg.innerHTML = JSON.stringify(data);
+				} catch (err) {
+					msg.innerHTML = err;
+				}
+			}
 
 
 		</script>
@@ -89,6 +112,6 @@
 		<button onclick='deleteTask()'>
 			Delete task
 		</button>
-    <p id="msg"></p>
+		<p id="msg"></p>
 	</body>
 </html>
