@@ -14,9 +14,7 @@
       }
 
 			async function listAllTasks() {
-				let response = await fetch(url, {
-					headers:
-				});
+				let response = await fetch(url);
 				let data = await response.json();
 				msg.innerHTML = JSON.stringify(data);
 			}
