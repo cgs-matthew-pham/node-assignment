@@ -6,7 +6,7 @@
 		<script>
 
 			// localhost:5000/tasks
-			var url = 'http://still-hollows-14204.herokuapp.com/tasks';
+			var url = 'https://still-hollows-14204.herokuapp.com/tasks';
       var msg;
 
       function init() {
@@ -14,7 +14,9 @@
       }
 
 			async function listAllTasks() {
-				let response = await fetch(url);
+				let response = await fetch(url, {
+					headers:
+				});
 				let data = await response.json();
 				msg.innerHTML = JSON.stringify(data);
 			}
