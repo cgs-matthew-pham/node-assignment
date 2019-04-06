@@ -55,6 +55,6 @@ exports.delete_a_task = function(req, res) {
     }
 
   } catch (err) {
-    res.status(500).send(new Error('Unknown server error', err));
+    res.send(err);
   }
 };
