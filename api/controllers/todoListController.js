@@ -44,6 +44,12 @@ exports.update_a_task = function(req, res) {
 
 
 exports.delete_a_task = function(req, res) {
+  Task.findOneAndRemove({_id: req.params.taskId}, function(err, task) {
+    if (err)
+      res.send(err);
+    res.json(task);
+  });
+  /*
   try {
     let task = Task.findOneAndRemove({
       _id: req.params.taskId
@@ -57,4 +63,5 @@ exports.delete_a_task = function(req, res) {
   } catch (err) {
     res.send(err);
   }
+  */
 };
